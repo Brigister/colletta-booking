@@ -17,7 +17,7 @@ const BandCard: React.FC<BandCard> = ({ band }) => {
 		<Link href={band.videoUrl} target="_blank">
 			<div className="flex w-fit cursor-pointer flex-col items-center justify-self-center rounded-xl bg-gray-900 hover:scale-[102%]">
 				<Image className="rounded-lg" src={image} width={400} height={400} alt="dcnn" blurDataURL={blurImage} placeholder="blur" />
-				{band.logoImage && (
+				{band.logoImage.data?.attributes.url && (
 					<div className="relative w-full">
 						<Image
 							alt={`${band.name} logo`}

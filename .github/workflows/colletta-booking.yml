@@ -14,9 +14,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
-      - name: Run server
+      - name: Install and build server
         working-directory: ./backend
         run: |
           npm install
           cp -a /home/byteman/collettabooking-config/backend/. ./
           npm run build
+          cp -R ./ /srv/colletta-booking/backend/
+      - name: Run server
+        working-directory: /srv/colletta-booking/backend/
+        run: |
+          rm -R ./src
+          pm2 restart cb-backend
