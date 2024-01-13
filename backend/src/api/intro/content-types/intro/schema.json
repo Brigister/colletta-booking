@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "intros",
+  "info": {
+    "singularName": "intro",
+    "pluralName": "intros",
+    "displayName": "intro",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "subtitle": {
+      "type": "text",
+      "required": true
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "title": {
+      "type": "text"
+    }
+  }
+}

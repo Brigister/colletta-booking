@@ -2,8 +2,8 @@ import BandCard from "@/components/BandCard";
 import Bio from "@/components/Bio";
 
 async function fetchBands() {
-	const url = `${process.env.STRAPI_URL}/api/bands?sort=order:asc&populate=*`;
-
+	const url = `${process.env.STRAPI_URL}/bands?sort=order:asc&populate=*`;
+	console.log(url);
 	try {
 		const response = await fetch(url, {
 			method: "GET",

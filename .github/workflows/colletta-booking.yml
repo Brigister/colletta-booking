@@ -1,4 +1,10 @@
-name: Backend
+name: Deploy CollettaBooking
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  BE_DIRECTORY: ./backend
+  FE_DIRECTORY: ./frontend
 
 on:
   push:
@@ -15,7 +21,7 @@ jobs:
         with:
           node-version: 18.x
       - name: Install and build server
-        working-directory: ./backend
+        working-directory: ${{ env.BE_DIRECTORY }}
         run: |
           npm install
           cp -a /home/byteman/collettabooking-config/backend/. ./
@@ -26,3 +32,19 @@ jobs:
         run: |
           rm -R ./src
           pm2 restart cb-backend
+  frontend:
+    runs-on: self-hosted
+    needs: backend
+
+    steps:
+      - name: Install Vercel CLI
+        run: npm install --global vercel
+      - name: Pull Vercel Environment Information
+        working-directory: ${{ env.FE_DIRECTORY }}
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        working-directory: ${{ env.FE_DIRECTORY }}
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        working-directory: ${{ env.FE_DIRECTORY }}
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
