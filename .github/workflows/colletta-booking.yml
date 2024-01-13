@@ -4,6 +4,7 @@ env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
   BE_DIRECTORY: ./backend
+  BE_DIST_DIRECTORY: /srv/colletta-booking/backend/
   FE_DIRECTORY: ./frontend
 
 on:
@@ -26,9 +27,9 @@ jobs:
           npm install
           cp -a /home/byteman/collettabooking-config/backend/. ./
           npm run build
-          cp -R ./ /srv/colletta-booking/backend/
+          cp -R ./ ${{ env.BE_DIST_DIRECTORY }}
       - name: Run server
-        working-directory: /srv/colletta-booking/backend/
+        working-directory: ${{ env.BE_DIST_DIRECTORY }}
         run: |
           rm -R ./src
           pm2 restart cb-backend
