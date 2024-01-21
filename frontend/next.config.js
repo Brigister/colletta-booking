@@ -16,13 +16,13 @@ const nextConfig = {
 			},
 			{
 				protocol: "http",
-				hostname: "strapi.lacollettadischi.it",
-				pathname: "/uploads/**",
+				hostname: "*.lacollettadischi.it",
+				port: "",
 			},
 			{
 				protocol: "https",
-				hostname: "strapi.lacollettadischi.it",
-				pathname: "/uploads/**",
+				hostname: "*.lacollettadischi.it",
+				port: "",
 			},
 		],
 		domains: ["localhost", "127.0.0.1", "strapi.lacollettadischi.it"],
