@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
+import Metadata from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "La colletta dischi",
+	title: "La colletta booking",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

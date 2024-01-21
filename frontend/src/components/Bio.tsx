@@ -1,8 +1,10 @@
-const Bio: React.FC = () => {
+const Bio: React.FC = async () => {
+	const year = new Date().getFullYear();
+
 	return (
 		<>
 			<h1 className="pb-2 text-center text-7xl font-bold">La Colletta Booking</h1>
-			<p className="pb-2 text-center text-4xl">Roster 2023</p>
+			<p className="pb-2 text-center text-4xl">Roster {year}</p>
 
 			<p className="m-4">
 				​Ciao!, A seguire una breve presentazione del reparto alternative/indie. Di seguito una breve presentazione del reparto

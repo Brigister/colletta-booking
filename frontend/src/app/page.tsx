@@ -3,23 +3,22 @@ import Bio from "@/components/Bio";
 
 async function fetchBands() {
 	const url = `${process.env.STRAPI_URL}/bands?sort=order:asc&populate=*`;
-	console.log(url);
-	try {
-		const response = await fetch(url, {
-			method: "GET",
-			cache: "no-cache",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `bearer ${process.env.STRAPI_TOKEN}`,
-			},
-		});
 
-		const data = await response.json();
-		return data.data;
-	} catch (error) {
-		console.log(error);
-		throw error;
+	const response = await fetch(url, {
+		method: "GET",
+		cache: "no-cache",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `bearer ${process.env.STRAPI_TOKEN}`,
+		},
+	});
+
+	if (!response.ok) {
+		throw new Error("Failed to fetch bands");
 	}
+
+	const data = await response.json();
+	return data.data;
 }
 
 export default async function Home() {
