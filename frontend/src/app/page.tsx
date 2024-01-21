@@ -2,27 +2,27 @@ import BandCard from "@/components/BandCard";
 import Bio from "@/components/Bio";
 
 async function fetchBands() {
-	const url = `${process.env.STRAPI_URL}/api/bands?sort=order:asc&populate=*`;
+	const url = `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/bands?sort=order:asc&populate=*`;
 
-	const response = await fetch(url, {
-		method: "GET",
-		cache: "no-cache",
-		headers: {
-			"Content-Type": "application/json",
-			Authorization: `bearer ${process.env.STRAPI_TOKEN}`,
-		},
-	});
-
-	if (!response.ok) {
-		throw new Error("Failed to fetch bands");
+	try {
+		const response = await fetch(url, {
+			method: "GET",
+			cache: "no-cache",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `bearer ${process.env.STRAPI_TOKEN}`,
+			},
+		});
+		const data = await response.json();
+		return data.data;
+	} catch (error) {
+		console.log(error);
 	}
-
-	const data = await response.json();
-	return data.data;
 }
 
 export default async function Home() {
 	const bands = (await fetchBands()) || [];
+
 	return (
 		<>
 			<Bio />

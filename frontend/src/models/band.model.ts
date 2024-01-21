@@ -5,7 +5,11 @@ export interface Band {
 	instagramUrl: string;
 	facebookUrl: string;
 	youtubeUrl: string;
-	videoUrl: string;
+	videoUrl: {
+		provider: string;
+		providerUid: string;
+		url: string;
+	};
 	description: string;
 	createdAt: string;
 	updatedAt: string;
