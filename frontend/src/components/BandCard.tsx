@@ -1,15 +1,18 @@
+"use client";
+
 import { Band } from "@/models/band.model";
 import Image from "next/image";
 import Link from "next/link";
 import SocialLink from "./SocialLink";
 import { getStrapiImage } from "@/utils/images";
+import { useState } from "react";
 
 interface BandCard {
 	band: Band;
 }
 
 const BandCard: React.FC<BandCard> = ({ band }) => {
-	const image = getStrapiImage(band.coverImage.data?.attributes.url);
+	const [image, setImage] = useState(getStrapiImage(band.coverImage.data?.attributes.url));
 	const blurImage = getStrapiImage(band.coverImage.data?.attributes.formats.thumbnail.url);
 	const logoImage = getStrapiImage(band.logoImage.data?.attributes.url);
 
@@ -25,6 +28,7 @@ const BandCard: React.FC<BandCard> = ({ band }) => {
 							height="60"
 							src={logoImage}
 							className="absolute -top-12 right-4 rounded-full object-cover"
+							onError={() => setImage("/assets/noimage.png")}
 						/>
 					</div>
 				)}

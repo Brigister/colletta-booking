@@ -6,6 +6,6 @@ export const getStrapiImage = (path: string = ""): string => {
 			return `${process.env.STRAPI_URL}${path}`;
 		}
 	} else {
-		return "/assets/noimage.jpg";
+		return "/assets/noimage.png";
 	}
 };
